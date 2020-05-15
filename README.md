@@ -1,8 +1,7 @@
 # Node API Masterclass with Express & Mongodb
 
 ## Real world backend for a bootcamp directory app
-
-This is a project based course where we build an extensive, in-depth backend API for DevCamper, a bootcamp directory app. We will start from scratch and end up with a professional deployed API with documentation. We will dive deep into Node, Express and MongoDB. Here is some of what you will learn in this course and project.
+An extensive, in-depth backend API for DevCamper, a bootcamp directory app.
 
 ## Takeaway from the project
 * Real World Backend RESTful API For Bootcamp Directory App
