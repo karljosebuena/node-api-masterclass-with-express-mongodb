@@ -2,7 +2,7 @@
 // @route   GET /api/v1/bootcamps
 // @access  Public
 exports.getBootCamps = (req, res, next) => {
-    res.status(200).send({ success: true, msg: 'Show all bootcamps' });
+    res.status(200).send({ success: true, msg: 'Show all bootcamps'});
     next();
 }
 // @desc    Get bootcamp by id
