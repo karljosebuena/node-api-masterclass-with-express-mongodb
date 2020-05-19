@@ -15,10 +15,7 @@ exports.getBootCamps = async (req, res, next) => {
             count: bootcamps.length
         });
     } catch (error) {
-        res.status(400).send({
-            success: false,
-            msg: error.message
-        })
+        next(error);
     }
 }
 // @desc    Get bootcamp by id
@@ -29,19 +26,14 @@ exports.getBootCamp = async (req, res, next) => {
     try {
         const bootcamp = await BootCamp.findById(id);
         if (!bootcamp)
-            return  next(new ErrorResponse(`Bootcamp not found with id of ${id}`, 404));
-
+            return next(new ErrorResponse(`Bootcamp not found with id of ${id}`, 404));
         res.status(200).send({
             success: true,
             msg: `Show bootcamp ${req.params.id}`,
             data: bootcamp
         });
     } catch (error) {
-        // res.status(400).send({
-        //     success: false,
-        //     msg: error.message
-        // })
-        next(new ErrorResponse(`Bootcamp not found with id of ${id}`, 404))
+        next(error)
     }
 }
 // @desc    Create/post new bootcamp
@@ -57,10 +49,7 @@ exports.postBootCamp = async (req, res, next) => {
             data: bootcamp
         });
     } catch (error) {
-        res.status(400).send({
-            success: false,
-            msg: error.message
-        })
+        next(error);
     }
 }
 // @desc    Update bootcamp by id
@@ -76,22 +65,14 @@ exports.putBootCamp = async (req, res, next) => {
         });
 
         if (!bootcamp)
-            return res.status(400).send({
-                success: false,
-                msg: `No record found for id ${req.params.id}`,
-                data: bootcamp
-            })
-
+            return next(new ErrorResponse(`No record found for id ${id}`, 404))
         res.status(200).send({
             success: true,
             msg: `Updated bootcamp ${id}`,
             data: bootcamp
         });
     } catch (error) {
-        res.status(400).send({
-            success: false,
-            msg: error.message
-        });
+        next(error);
     }
 }
 // @desc    Delete bootcamp by id
@@ -103,21 +84,13 @@ exports.deleteBootCamp = async (req, res, next) => {
         const bootcamp = await BootCamp.findByIdAndDelete(id);
 
         if (!bootcamp)
-            return res.status(400).send({
-                success: false,
-                msg: `No record found for id ${req.params.id}`,
-                data: bootcamp
-            })
-
+            return next(new ErrorResponse(`No record found for id ${id}`, 404));
         res.status(200).send({
             success: true,
             msg: `Deleted bootcamp  ${id}`,
             data: bootcamp
         });
     } catch (error) {
-        res.status(400).send({
-            success: false,
-            msg: error.message
-        });
+        next(error);
     };
 }
