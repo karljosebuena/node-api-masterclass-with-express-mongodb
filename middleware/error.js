@@ -4,7 +4,7 @@ const debug = require('debug')('server:middleware/error');
 module.exports = (err, req, res, next) => {
     // Log for console for the developer
     debug(err);
-    console.log(err)
+
     let error = { ...err };
     // Enumerability and ownership of properties
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Enumerability_and_ownership_of_properties
@@ -19,20 +19,20 @@ module.exports = (err, req, res, next) => {
             message = `Bootcamp not found with id of ${err.value}`;
             statusCode = 404;
             break;
+        // Mongoose required fields validation
         case 'ValidationError':
             message = Object.values(err.errors).map(val => val.message);
             statusCode = 400;
             break;
-        case '':
-            break;
-        case '':
-            break;
         default:
             // For err.code === 11000. Means duplicate entry on creating bootcamp
-            message = 'Duplicate name entered. Name must be unique.'
-            statusCode = 400;
+            if (err.code === 11000) {
+                message = 'Duplicate name entered. Name must be unique.'
+                statusCode = 400;
+            }
             break;
     }
+
     error = new ErrorResponse(message, statusCode);
     res.status(error.statusCode || 500).json({
         success: false,
