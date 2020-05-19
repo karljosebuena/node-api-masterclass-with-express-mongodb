@@ -21,7 +21,7 @@ const BootcampSchema = new mongoose.Schema({
     },
     phone: {
         type: String,
-        ma, xlength: [20, 'Phone number cannot more than 20 characters.']
+        maxlength: [20, 'Phone number cannot more than 20 characters.']
     },
     email: {
         type: String,
