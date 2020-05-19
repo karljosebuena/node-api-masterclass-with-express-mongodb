@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "NODE_ENV=production node server",
-    "dev": "DEBUG=* nodemon server",
+    "dev": "DEBUG=server,server:* nodemon server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -19,12 +19,24 @@
   },
   "homepage": "https://github.com/karljosebuena/node-api-masterclass-with-express-mongodb#readme",
   "dependencies": {
+    "colors": "1.4.0",
     "debug": "4.1.1",
     "dotenv": "8.2.0",
     "express": "4.17.1",
+    "mongoose": "5.9.15",
     "morgan": "1.10.0"
   },
   "devDependencies": {
     "nodemon": "2.0.4"
+  },
+  "nodemonConfig": {
+    "restartable": "rs",
+    "ignore": [
+      "node_modules/**/node_modules",
+      "test/*",
+      "docs/*"
+    ],
+    "ext": "js, css, env",
+    "delay": "2000"
   }
 }
